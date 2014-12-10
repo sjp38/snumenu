@@ -10,6 +10,17 @@ import (
 	"strings"
 )
 
+var menuPrices map[string]int = map[string]int{
+	"\xe2\x93\x9f": 1700,
+	"\xe2\x93\x91": 2000,
+	"\xe2\x93\x92": 2500,
+	"\xe2\x93\x93": 3000,
+	"\xe2\x93\x94": 3500,
+	"\xe2\x93\x95": 4000,
+	"\xe2\x93\x96": 4500,
+	"\xe2\x93\x97": 0,
+}
+
 var menuUrlPrefix string = "http://www.snuco.com/html/restaurant/"
 var menuUrls = [...]string{menuUrlPrefix + "restaurant_menu1.asp",
 	menuUrlPrefix + "restaurant_menu2.asp"}
@@ -75,6 +86,22 @@ func toUtf8(src []byte) []byte {
 	return buffer
 }
 
+func printMenu(texts []string) {
+	// breakfast, lunch, dinner 3 fields
+	for i, _ := range []string{"breakfast", "lunch", "dinner"} {
+		splitted := strings.Split(texts[i], "/")
+		for _, menu := range splitted {
+			key := string([]rune(menu)[0])
+			if price, exist := menuPrices[key]; exist {
+				trimmed := strings.Trim(menu, key)
+				trimmed = strings.Trim(trimmed, "&nbsp;")
+				fmt.Printf("%s (%d 원) / ", trimmed, price)
+			}
+		}
+		fmt.Printf("\n")
+	}
+}
+
 func getMenu(cafe string) {
 	for _, menuUrl := range menuUrls {
 		resp, err := http.Get(menuUrl)
@@ -93,7 +120,8 @@ func getMenu(cafe string) {
 
 		for i, s := range texts {
 			if s == cafe {
-				fmt.Printf("cafe: %s, menu: %v\n", cafe, texts[i+1:i+5])
+				fmt.Printf("[%s]\n", cafe)
+				printMenu(texts[i+1:])
 			}
 		}
 	}
