@@ -7,9 +7,11 @@ snumenu
 Usage
 -----
 
-`go run snumenu.go <name of cafeteria>`
+`go run snumenu.go [name of cafeteria]`
 
 e.g., `go run snumenu.go 302동`
+
+Default value of `name of cafeteria` is `302동`.
 
 
 Author
