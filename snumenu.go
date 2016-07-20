@@ -39,20 +39,6 @@ func test_textsInHtml() {
 	log.Println("success!")
 }
 
-// code stolen from golang blog
-func addString(slice []string, str string) []string {
-	n := len(slice)
-	if n == cap(slice) {
-		// Slice is full; must grow.
-		newSlice := make([]string, len(slice), 2*len(slice)+1)
-		copy(newSlice, slice)
-		slice = newSlice
-	}
-	slice = slice[0 : n+1]
-	slice[n] = str
-	return slice
-}
-
 func textsInHtml(s string) []string {
 	start, end := 0, len(s)
 	var res []string
