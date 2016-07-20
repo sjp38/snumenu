@@ -44,8 +44,8 @@ func textsInHtml(s string) []string {
 	var res []string
 
 	for i, c := range s {
-		if trimmed := strings.TrimSpace(s[start:i]); trimmed != "" && trimmed != "&nbsp;" &&
-			c == '<' {
+		if trimmed := strings.TrimSpace(s[start:i]); trimmed != "" &&
+			trimmed != "&nbsp;" && c == '<' {
 			end = i
 			res = append(res, strings.TrimSpace(s[start:end]))
 		} else if c == '>' {
