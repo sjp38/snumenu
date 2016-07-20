@@ -1,8 +1,8 @@
 package main
 
 import (
-	"golang.org/x/text/encoding/korean"
 	"fmt"
+	"golang.org/x/text/encoding/korean"
 	"io/ioutil"
 	"log"
 	"net/http"
