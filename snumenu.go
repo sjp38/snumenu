@@ -55,19 +55,19 @@ func addString(slice []string, str string) []string {
 
 func textsInHtml(s string) []string {
 	start, end := 0, len(s)
-	res := make([]string, 0, 20)
+	var res []string
 
 	for i, c := range s {
 		if trimmed := strings.TrimSpace(s[start:i]); trimmed != "" && trimmed != "&nbsp;" &&
 			c == '<' {
 			end = i
-			res = addString(res, strings.TrimSpace(s[start:end]))
+			res = append(res, strings.TrimSpace(s[start:end]))
 		} else if c == '>' {
 			start = i + 1
 		}
 	}
 	if start != len(s) {
-		res = addString(res, s[start:])
+		res = append(res, s[start:])
 	}
 	return res
 }
