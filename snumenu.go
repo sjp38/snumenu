@@ -1,7 +1,7 @@
 package main
 
 import (
-	"code.google.com/p/go.text/encoding/korean"
+	"golang.org/x/text/encoding/korean"
 	"fmt"
 	"io/ioutil"
 	"log"
