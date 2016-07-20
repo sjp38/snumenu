@@ -102,7 +102,7 @@ func printMenu(texts []string) {
 	}
 }
 
-func getMenu(cafe string) {
+func getMenu(cafes []string) {
 	for _, menuUrl := range menuUrls {
 		resp, err := http.Get(menuUrl)
 		if err != nil {
@@ -118,19 +118,21 @@ func getMenu(cafe string) {
 		bodyString := string(toUtf8(body))
 		texts := textsInHtml(bodyString)
 
-		for i, s := range texts {
-			if s == cafe {
-				fmt.Printf("[%s]\n", cafe)
-				printMenu(texts[i+1:])
+		for _, cafe := range cafes {
+			for i, s := range texts {
+				if s == cafe {
+					fmt.Printf("[%s]\n", cafe)
+					printMenu(texts[i+1:])
+				}
 			}
 		}
 	}
 }
 
 func main() {
-	cafe := "302동"
+	cafes := []string{"302동"}
 	if len(os.Args) > 1 {
-		cafe = os.Args[1]
+		cafes = os.Args[1:]
 	}
-	getMenu(cafe)
+	getMenu(cafes)
 }
