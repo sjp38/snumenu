@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var menuPrices = map[string]int {
+var menuPrices = map[string]int{
 	"\xe2\x93\x9f": 1700,
 	"\xe2\x93\x91": 2000,
 	"\xe2\x93\x92": 2500,
@@ -22,6 +22,7 @@ var menuPrices = map[string]int {
 }
 
 const menuUrlPrefix string = "http://www.snuco.com/html/restaurant/"
+
 var menuUrls = []string{menuUrlPrefix + "restaurant_menu1.asp",
 	menuUrlPrefix + "restaurant_menu2.asp"}
 
